@@ -1,0 +1,856 @@
+{
+	"info": {
+		"_postman_id": "e8a01460-194a-47a5-a6fc-f03cbb3d07ba",
+		"name": "Kraliss",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentification",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"yahyabahloul1999si@gmail.com\",\n    \"password\": \"9453\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://bigastora.com/api/login",
+							"protocol": "https",
+							"host": [
+								"bigastora",
+								"com"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SignUp-Standard",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"requestCode\":0,\n\"email\":\"lodjadsbs457szs@gmail.com\",\n\"password\":\"9453\",\n\"lastName\":\"Bienven\",\n\"firstName\":\"sssll\",\n\"birthDate\": \"1983-06-15T12:26:37.585Z\",\n\"citizenUs\": false,\n\"fiscalUs\": false,\n\"fiscalOutFrance\": true,\n\"addressLabel1\":\"Avenue La Place\",\n\"addressZipCode\":75000,\n\"addressCity\":\"Paris\",\n\"civility\":\"Mr\",\n\"birthCountry\":\"/api/countries/71\",\n\"addressCountry\":\"/api/countries/71\",\n\"phoneMobile\": 651000000,\n\"phoneFixed\": 145000000,\n\"language\": \"/api/languages/50\",\n\"nationality\":\"/api/countries/63\",\n\"typeAccount\":\"/api/type_accounts/1\",\n\"birthCity\":\"paris\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://bigastora.com/api/users",
+							"protocol": "https",
+							"host": [
+								"bigastora",
+								"com"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SignUp-Business",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \n    \"requestCode\": 0,\n    \"email\": \"daba.buqsiness@mail.fr\",\n    \"password\": \"1234\",\n    \"lastName\": \"string\",\n    \"firstName\": \"string\",\n    \"birthDate\": \"1983-06-15T12:26:37.585Z\",\n    \"citizenUs\": false,\n    \"fiscalUs\": false,\n    \"fiscalOutFrance\": true,\n    \"addressLabel1\": \"Avenue La Place\",\n    \"addressZipCode\": 75000,\n    \"addressCity\": \"Paris\",\n    \"civility\": \"Monsieur\",\n    \"birthCountry\": \"/api/countries/71\",\n    \"addressCountry\": \"/api/countries/71\",\n    \"phoneMobile\": 651000000,\n    \"phoneFixed\": 145000000,\n    \"companyName\": \"daba\",\n    \"companyCRN\": \"dabszssssqa\",\n    \"compagnyActivity\": \"/api/compagny_activities/1\",\n    \"language\": \"/api/languages/50\",\n    \"nationality\": \"/api/countries/71\",\n    \"typeAccount\": \"/api/type_accounts/2\",\n    \"birthCity\": \"Paris\"\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://bigastora.com/api/users",
+							"protocol": "https",
+							"host": [
+								"bigastora",
+								"com"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get ID by token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "CV3YoiPgLf55iAVc4O8idRYEDtkqPXgwjCA4pkTm14OoXcM_T4T55QgtIcgeEI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"requestCode\": 22\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://bigastora.com/api/users",
+							"protocol": "https",
+							"host": [
+								"bigastora",
+								"com"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "All User details(by ID)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Tm14OoXcM_T4T55QgtIcgeEI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://bigastora.com/api/users/143",
+							"protocol": "https",
+							"host": [
+								"bigastora",
+								"com"
+							],
+							"path": [
+								"api",
+								"users",
+								"143"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get account",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://bigastora.com/api/accounts/98",
+							"protocol": "https",
+							"host": [
+								"bigastora",
+								"com"
+							],
+							"path": [
+								"api",
+								"accounts",
+								"98"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add beneficiary",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "9vQ5KSBHFeSboWLlOKqog35ufsKzNf6RJC060ZtfMJ96yf6I",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 73DqFfjSiiVMPPBKA1Tc7oVVseW8kn0HoFBhSAv5d_zsz125yvijHAILn8",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\n      \"requestCode\" : 10,\n      \"beneficiaryEmail\" : \"yahyabahloul1999@gmail.com\"\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://bigastora.com/api/users",
+							"protocol": "https",
+							"host": [
+								"bigastora",
+								"com"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete beneficiary",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "vUoQkU2dKIlH7bj0SmRNFYAF2_eA6V1CIuJxZFnzSQSrNw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/ld+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\n      \"requestCode\" : 11,\n      \"beneficiaryEmail\" : \"yahyabahloul1999@gmail.com\"\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://bigastora.com/api/users",
+							"protocol": "https",
+							"host": [
+								"bigastora",
+								"com"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Password-Reset",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"yahyabahloul1999@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://bigastora.com/reset-password/api",
+							"protocol": "https",
+							"host": [
+								"bigastora",
+								"com"
+							],
+							"path": [
+								"reset-password",
+								"api"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change user infos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "P9qS0QNBwnNPtJbnlqxxPyaXKfPwK2HVXPFOl2cTlf7sbQGOAZnrBbHz2FVvSvqOx39Pn6L-k",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"requestCode\" : 30,\n    \"password\" : \"9453\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://bigastora.com/api/users",
+							"protocol": "https",
+							"host": [
+								"bigastora",
+								"com"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User KYC status",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "AY9a2VPRn-o6Kf9eRKQZmQ5nKqqaqdWGBr2AQ4MQlg9SKJMIfwRSuKNSq2Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/ld+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"requestCode\" : 40\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://bigastora.com/api/users",
+							"protocol": "https",
+							"host": [
+								"bigastora",
+								"com"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transaction",
+			"item": [
+				{
+					"name": "Send money",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "7uTILHVCn5M-ZDihcdfVKtg85SxwHmIWIVm_WKU3vvOM2ZI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\n  { \"requestCode\": 0,\n\"amount\":1,\"message\":\"Gg\",\"currencyStart\":\"/api/countries/72\",\"currencyEnd\":\"/api/countries/81\",\"transactionType\":\"api/type_transactions/5\",\"receiverWallet\":\"/api/users/89\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://bigastora.com/api/transactions",
+							"protocol": "https",
+							"host": [
+								"bigastora",
+								"com"
+							],
+							"path": [
+								"api",
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ask money",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "jC9urb8Riw0ue49O72f-edt7hohA0TSXnba7FteckbFERjRd45rzfcRbE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\n    \"requestCode\": 0,\n    \"amount\": 1,\n    \"message\": \"test send money with api rest\",\n    \"currencyStart\": \"/api/countries/71\",\n    \"currencyEnd\": \"/api/countries/71\",\n    \"transactionType\": \"api/type_transactions/6\",\n    \"receiverWallet\": \"/api/users/89\"\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://bigastora.com/api/transactions",
+							"protocol": "https",
+							"host": [
+								"bigastora",
+								"com"
+							],
+							"path": [
+								"api",
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Encaissement - create qrCode",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "hJSkVhWzwnSqPpYFw8H4OJLuqA31GGctlfK3ZdMKLk39eK3ARZsMAJ2aMdvTBigWb-4Wbhg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \n    \"amount\": 2,\n    \"message\":\"Encaissement test\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://bigastora.com/api/qr_codes",
+							"protocol": "https",
+							"host": [
+								"bigastora",
+								"com"
+							],
+							"path": [
+								"api",
+								"qr_codes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Encaissement - delete qrCode",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "jC9urb8Riw0ue49O72f-edt7hohA0TSXnba7FteckbFERjRd45rzfcRbE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "https://bigastora.com/api/qr_codes/22",
+							"protocol": "https",
+							"host": [
+								"bigastora",
+								"com"
+							],
+							"path": [
+								"api",
+								"qr_codes",
+								"22"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "paiement mobile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "nHwDcadjkCniNwFG9I6Cjx1XmRVfA84jkds2aprD9gOQiewQUihnnB6Xft_4IFdAie3k8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\n    \"requestCode\": 0,\n    \"qrCode\": \"/api/qr_codes/18\",\n    \"currencyStart\": \"/api/countries/71\",\n    \"currencyEnd\": \"/api/countries/71\",\n    \"transactionType\": \"api/type_transactions/1\"\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://bigastora.com/api/transactions",
+							"protocol": "https",
+							"host": [
+								"bigastora",
+								"com"
+							],
+							"path": [
+								"api",
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Transactions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "9mExHN7R43WAwpv5-kGfPyrVQIdApX9l0I6SzEpppOReHmOn-kc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "     {  \n     \"requestCode\": 1\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://bigastora.com/api/transactions",
+							"protocol": "https",
+							"host": [
+								"bigastora",
+								"com"
+							],
+							"path": [
+								"api",
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Document",
+			"item": [
+				{
+					"name": "create Document",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "GYMIIgCuCLIqwJzYksyS7q7lPLyobfORBFkEdB4ha66WcN_UkrqpnYm2TA8ijfzmev0oPgmjdemfpaipfNxKseEOcU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "document_file",
+									"type": "file",
+									"src": "/home/sanata/Downloads/IBAN.pdf"
+								},
+								{
+									"key": "type",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "requestCode",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "numberBank",
+									"value": "FR5810096000405641571681B58\n\n",
+									"type": "text"
+								},
+								{
+									"key": "bic",
+									"value": "CMCIFR2A",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "APIMoneyId",
+									"value": "DO-8011258052538625",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "https://bigastora.com/api/ressources",
+							"protocol": "https",
+							"host": [
+								"bigastora",
+								"com"
+							],
+							"path": [
+								"api",
+								"ressources"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Ressources Me",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "pViq0fwlDQOhLFWFVA-NYDjqEJCCA-A6_LAZAuxHEQA5D_e8O2D7-zFrr5w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"requestCode\" :2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://bigastora.com/api/ressources",
+							"protocol": "https",
+							"host": [
+								"bigastora",
+								"com"
+							],
+							"path": [
+								"api",
+								"ressources"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete Document",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "pViq0fwlDQOhLFWFVA-NYDjqEJCCA-A6_LAZAuxHEQA5D_e8O2D7-zFrr5w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"requestCode\" : 4,\n    \"APIMoneyId\" : \"DO-7714669987453273\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://bigastora.com/api/ressources",
+							"protocol": "https",
+							"host": [
+								"bigastora",
+								"com"
+							],
+							"path": [
+								"api",
+								"ressources"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user Document",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "ocKJqpVWFKd6lMaeqGlWUKCnM9_Ui3A79x1aB7iu90q6s_1zv5u87eE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"requestCode\" : 3,\n    \"docId\" : \"DO-5485991100790588\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://bigastora.com/api/ressources",
+							"protocol": "https",
+							"host": [
+								"bigastora",
+								"com"
+							],
+							"path": [
+								"api",
+								"ressources"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

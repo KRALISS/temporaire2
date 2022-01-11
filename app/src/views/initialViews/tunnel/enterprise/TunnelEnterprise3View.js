@@ -1,0 +1,440 @@
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform, Alert
+} from "react-native";
+import React, { Component } from "react";
+import {RFPercentage} from "react-native-responsive-fontsize";
+import { NavigationActions } from "react-navigation";
+import PageControl from "react-native-page-control";
+import Moment from "moment";
+import GradientView from "../../../../components/gradientView/GradientView";
+import NavHeader from "../../../../components/navHeader/NavHeader";
+import KralissPicker from "../../../../components/kralissPicker/KralissPicker";
+import KralissInput from "../../../../components/kralissInput/KralissInput";
+import KralissButton from "../../../../components/kralissButton/KralissButton";
+import { loadLocalData, saveLocalData } from "../../../../utils/localStorage";
+import KralissDatePicker from "../../../../components/kralissPicker/KralissDatePicker";
+import {
+  SecondaryColor,
+  PageControlGrayColor
+} from "../../../../assets/styles/Styles";
+//Add i18n
+import i18n from "../../../../locale/i18n";
+
+export default class TunnelEnterprise3View extends Component {
+  state = {
+    civility: "",
+    civilityIndex: "",
+    lastName: "",
+    firstName: "",
+    // myuserBirthdate: new Date(),
+    myuserNationality: "", //international_iso_code
+    myuserNationalityIndex: 0,
+    myuserLanguage: "", //international_iso_code
+    myuserLanguageIndex: 0,
+    functionInSociety: "",
+    idInternationalPhone: "",
+    idInternationalPhoneIndex: null,
+    myuserPhoneNumber: "",
+    idInternationalMobilePhone: "", //international_iso_code
+    idInternationalMobilePhoneIndex: null,
+    myuserMobilePhoneNumber: "",
+    userBirthCity:"",
+
+    internationalPhonesNum: [],
+    countries: [],
+    internationals: [],
+    allInternationals: [],
+    languages: []
+
+  };
+
+  onPressFollowing = async () => {
+    /// CIVILITY
+    if(this.state.civilityIndex === 0) {
+      saveLocalData("civility", "Monsieur")
+    } else if (this.state.civilityIndex === 1) {
+      saveLocalData("civility", "Mme")
+    };
+    saveLocalData("firstName", this.state.firstName);
+    saveLocalData("lastName", this.state.lastName);
+
+    /// Get all the infos of country
+    let listsCountries = await loadLocalData("allInternationals");
+    listsCountries = listsCountries.sort(this.sortPropsInternational)
+    saveLocalData(
+      "myuserNationality",
+      listsCountries[this.state.myuserNationalityIndex]["@id"]
+        
+    );
+    let listsLanguages = await loadLocalData("allLanguages");
+    saveLocalData(
+      "myuserLanguage",
+      listsLanguages[this.state.myuserLanguageIndex]["@id"]
+    );
+    const _birthDay = Moment(this.state.myuserBirthdate, "DD-MM-YYYY").format("YYYY-MM-DD");
+    saveLocalData("myuserBirthdate", _birthDay);
+    saveLocalData("functionInSociety", this.state.functionInSociety);
+    saveLocalData(
+      "myuserBirthCountry",
+      listsCountries[this.state.myuserBirthCountryIndex]["@id"]
+    );
+    saveLocalData("userBirthCity", this.state.userBirthCity);
+
+    // saveLocalData(
+    //   "idInternationalPhone",
+    //   this.state.internationals[this.state.idInternationalPhoneIndex].id
+    // );
+    // saveLocalData("myuserPhoneNumber", this.state.myuserPhoneNumber);
+    // saveLocalData(
+    //   "myuserInternationalPhone",
+    //   this.state.internationals[this.state.idInternationalPhoneIndex]
+    // );
+    // saveLocalData(
+    //   "idInternationalMobilePhone",
+    //   this.state.internationals[this.state.idInternationalMobilePhoneIndex].id
+    // );
+    // saveLocalData(
+    //   "myuserMobilePhoneNumber",
+    //   this.state.myuserMobilePhoneNumber
+    // );
+    // saveLocalData(
+    //   "myuserInternationalMobilePhone",
+    //   this.state.internationals[this.state.idInternationalMobilePhoneIndex]
+    // );
+
+
+    if(this.state.idInternationalPhone !== '' && this.state.myuserPhoneNumber !== ''){
+      saveLocalData(
+        "myuserInternationalPhone",
+        this.findTheGoodInternationnals(this.state.idInternationalPhone)
+      );
+      saveLocalData(
+        "myuserPhoneNumber",
+        this.state.myuserPhoneNumber
+      );
+      saveLocalData(
+        "idInternationalPhone",
+        this.state.internationalPhonesNum[this.state.idInternationalPhoneIndex]
+      );
+    }
+
+    if(this.state.myuserMobilePhoneNumber !== '' && this.state.idInternationalMobilePhone !== ""){
+      saveLocalData(
+        "myuserInternationalMobilePhone",
+        this.findTheGoodInternationnals(this.state.idInternationalMobilePhone)
+      );
+      saveLocalData(
+        "myuserMobilePhoneNumber",
+        this.state.myuserMobilePhoneNumber
+      );
+      saveLocalData(
+        "idInternationalMobilePhone",
+        this.state.internationalPhonesNum[this.state.idInternationalMobilePhoneIndex]
+      );
+    }
+
+
+    let age;
+    if(this.state.myuserBirthdate) {
+      age = Math.abs(Moment(this.state.myuserBirthdate, "DD-MM-YYYY").diff(Moment(), 'years'))
+    } else {
+      age = 0
+    }
+
+    if (age < 18) {
+      setTimeout(() => {
+        Alert.alert(
+          i18n.t('tunnel.ageTitle'),
+          i18n.t('tunnel.ageDesc'),
+        )
+      }, 500)
+    }else{
+      const navigateAction = NavigationActions.navigate({
+        routeName: "TunnelPersonalInfoView",
+        params: { enterprise: true }
+      });
+      this.props.navigation.dispatch(navigateAction);
+    }
+
+
+  };
+
+  findTheGoodInternationnals = (indicatifCountry) => {
+    const {internationals} = this.state
+    for(var i = 0; i < internationals.length; i ++ ) {
+      if(indicatifCountry === internationals[i].international_phone) {
+        return internationals[i];
+      }
+    }
+  }
+
+  onPressPageIndicator = index => {};
+
+  sortPropsInternational = (item1, item2) => {
+    if (item1.international_name < item2.international_name) return -1;
+    if (item1.international_name > item2.international_name) return 1;
+    return 0;
+  };
+
+  async componentDidMount() {
+    const internationalPhonesNum = await loadLocalData("internationalPhones");
+    this.setState({ internationalPhonesNum });
+
+    const internationals = await loadLocalData("internationals");
+    this.setState({ internationals });
+    let allInternationals = await loadLocalData("allInternationals");
+    allInternationals = allInternationals.sort(this.sortPropsInternational)
+    let nameAllInternationals = [];
+    for(let i in allInternationals) {
+      nameAllInternationals.push(allInternationals[i]["label"])
+    }
+    this.setState({ allInternationals: nameAllInternationals })
+    const languages = await loadLocalData("languages");
+    this.setState({ languages });
+  }
+
+  componentDidUpdate = (prevProps, prevState) => {};
+
+  onChangeInputText = (id, value) => {
+    var _stateObj = {};
+    _stateObj[id] = value;
+    this.setState(_stateObj);
+  };
+
+  render() {
+    let buttonEnable = true;
+    if (
+      this.state.lastName.length === 0 ||
+      this.state.firstName.length === 0 ||
+      this.state.myuserNationality.length === 0 ||
+      !( (this.state.myuserMobilePhoneNumber !== '' && this.state.idInternationalMobilePhone !== '' )
+       
+      )
+    ){
+      buttonEnable = false;
+    }
+
+    return (
+      <GradientView style={styles.container}>
+        <KeyboardAvoidingView
+          style={styles.container}
+          behavior="padding"
+          enabled = {Platform.OS === 'ios' ? true : false}
+        >
+          <ScrollView>
+            <NavHeader
+              onBack={() => {
+                this.props.navigation.goBack();
+              }}
+            />
+            <View style={styles.header}>
+              <Text style={styles.headerText}>
+                {i18n.t("tunnel.legalRepresntative")}
+              </Text>
+            </View>
+
+            <View style={styles.center}>
+              <KralissPicker
+                placeHolder={i18n.t("tunnel.civility")}
+                confirmBtnTitle={i18n.t("tunnel.done")}
+                cancelBtnTitle={i18n.t("tunnel.cancel")}
+                pickerData={[i18n.t("tunnel.mister"), i18n.t("tunnel.miss")]}
+                value={this.state.civility}
+                onSelect={(civility, civilityIndex) => {
+                  this.setState({ civility, civilityIndex });
+                }}
+              />
+              <KralissInput
+                ID="lastName"
+                placeHolder={i18n.t("tunnel.lastName")}
+                onChangeText={this.onChangeInputText}
+                value={this.state.lastName}
+              />
+              <KralissInput
+                ID="firstName"
+                placeHolder={i18n.t("tunnel.firstName")}
+                onChangeText={this.onChangeInputText}
+                value={this.state.firstName}
+              />
+              <KralissDatePicker
+                placeHolder={i18n.t("tunnel.birthday")}
+                value={this.state.myuserBirthdate}
+                confirmBtnTitle={i18n.t("tunnel.done")}
+                cancelBtnTitle={i18n.t("tunnel.cancel")}
+                onSelect={myuserBirthdate => {
+                  this.setState({ myuserBirthdate });
+                }}
+              />
+              <KralissPicker
+                placeHolder={i18n.t("tunnel.nationality")}
+                confirmBtnTitle={i18n.t("tunnel.done")}
+                cancelBtnTitle={i18n.t("tunnel.cancel")}
+                pickerData={this.state.allInternationals}
+                value={this.state.myuserNationality}
+                onSelect={(myuserNationality, myuserNationalityIndex) => {
+                  this.setState({ myuserNationality, myuserNationalityIndex });
+                }}
+              />
+              <KralissPicker
+                placeHolder={i18n.t("tunnel.language")}
+                confirmBtnTitle={i18n.t("tunnel.done")}
+                cancelBtnTitle={i18n.t("tunnel.cancel")}
+                pickerData={this.state.languages}
+                value={this.state.myuserLanguage}
+                onSelect={(myuserLanguage, myuserLanguageIndex) => {
+                  this.setState({ myuserLanguage, myuserLanguageIndex });
+                }}
+              />
+              <KralissPicker
+                placeHolder={i18n.t("tunnel.userBirthCountry")}
+                confirmBtnTitle={i18n.t("tunnel.done")}
+                cancelBtnTitle={i18n.t("tunnel.cancel")}
+                pickerData={this.state.allInternationals}
+                value={this.state.myuserBirthCountry}
+                onSelect={(myuserBirthCountry, myuserBirthCountryIndex) => {
+                  this.setState({ myuserBirthCountry, myuserBirthCountryIndex });
+                }}
+              />
+              <KralissInput
+                ID="userBirthCity"
+                placeHolder={i18n.t("tunnel.userBirthCity")}
+                onChangeText={this.onChangeInputText}
+                value={this.state.userBirthCity}
+              />
+              <Text style={styles.phoneSectionText}>
+                {i18n.t("tunnel.phoneNumberFix")}
+              </Text>
+              <View style={styles.phoneSection}>
+                <KralissPicker
+                  style={styles.phoneNum1}
+                  placeHolder={i18n.t("tunnel.phoneNumEx1")}
+                  confirmBtnTitle={i18n.t("tunnel.done")}
+                  cancelBtnTitle={i18n.t("tunnel.cancel")}
+                  pickerData={this.state.internationalPhonesNum}
+                  value={this.state.idInternationalPhone}
+                  onSelect={(idInternationalPhone, idInternationalPhoneIndex) =>
+                    this.setState({
+                      idInternationalPhone,
+                      idInternationalPhoneIndex
+                    })
+                  }
+                />
+                <KralissInput
+                  ID="myuserPhoneNumber"
+                  style={styles.phoneNum2}
+                  placeHolder={i18n.t("tunnel.phoneNumEx2")}
+                  onChangeText={this.onChangeInputText}
+                  keyboardType={"numeric"}
+                  value={this.state.myuserPhoneNumber}
+                />
+              </View>
+              <Text style={styles.phoneSectionText}>
+                {i18n.t("tunnel.phoneNumbermobile")}
+              </Text>
+              <View style={styles.phoneSection}>
+                <KralissPicker
+                  style={styles.phoneNum1}
+                  placeHolder={i18n.t("tunnel.phoneNumEx1")}
+                  confirmBtnTitle={i18n.t("tunnel.done")}
+                  cancelBtnTitle={i18n.t("tunnel.cancel")}
+                  pickerData={this.state.internationalPhonesNum}
+                  value={this.state.idInternationalMobilePhone}
+                  onSelect={(
+                    idInternationalMobilePhone,
+                    idInternationalMobilePhoneIndex
+                  ) =>
+                    this.setState({
+                      idInternationalMobilePhone,
+                      idInternationalMobilePhoneIndex
+                    })
+                  }
+                />
+                <KralissInput
+                  ID="myuserMobilePhoneNumber"
+                  style={styles.phoneNum2}
+                  placeHolder={i18n.t("tunnel.phoneNumEx2")}
+                  onChangeText={this.onChangeInputText}
+                  keyboardType={"numeric"}
+                  value={this.state.myuserMobilePhoneNumber}
+                />
+              </View>
+              <PageControl
+                style={styles.pageIndicator}
+                numberOfPages={4}
+                currentPage={2}
+                hidesForSinglePage
+                pageIndicatorTintColor={PageControlGrayColor}
+                currentPageIndicatorTintColor={SecondaryColor}
+                indicatorStyle={{ borderRadius: 5 }}
+                currentIndicatorStyle={{ borderRadius: 5 }}
+                indicatorSize={{ width: 8, height: 8 }}
+                onPageIndicatorPress={this.onPressPageIndicator}
+              />
+              <KralissButton
+                style={styles.sendBtn}
+                onPress={this.onPressFollowing}
+                title={i18n.t("tunnel.following")}
+                enabled={buttonEnable}
+              />
+            </View>
+          </ScrollView>
+        </KeyboardAvoidingView>
+      </GradientView>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    alignItems: "center"
+  },
+  header: {
+    width: "100%",
+    height: 100,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  headerText: {
+    color: "#fff",
+    fontSize: RFPercentage(2.3),
+    textAlign: "center"
+  },
+  phoneSectionText: {
+    marginTop: 30,
+    color: "#fff",
+    fontSize: RFPercentage(2.3),
+    textAlign: "left"
+  },
+  center: {
+    flex: 1,
+    justifyContent: "flex-start"
+  },
+  pageIndicator: {
+    flex: 1,
+    marginTop: 50
+  },
+  phoneSection: {
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center"
+  },
+  phoneNum1: {
+    flex: 0.3
+  },
+  phoneNum2: { flex: 0.7, marginLeft: 10 },
+  sendBtn: {
+    width: "100%",
+    height: 55,
+    marginTop: 20,
+    marginBottom: 20
+  }
+});

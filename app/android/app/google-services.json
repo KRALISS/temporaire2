@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "1028185588291",
+    "firebase_url": "https://kraliss.firebaseio.com",
+    "project_id": "kraliss",
+    "storage_bucket": "kraliss.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1028185588291:android:3f4198ccafc0218a",
+        "android_client_info": {
+          "package_name": "kraliss.com.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1028185588291-7ld8jrk4ob0v7b6hrjc1dhqctic2u8cb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kraliss.com.android",
+            "certificate_hash": "487e8d4c25c550afbad5e813683f1246352cac7b"
+          }
+        },
+        {
+          "client_id": "1028185588291-ht5prvq7482q86mvdtim0uvh3kc30f2h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "XXXYYYZZZ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1028185588291-ht5prvq7482q86mvdtim0uvh3kc30f2h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1028185588291-i14sr1b09prpjhr7gjcjtn0c5j7k9iqk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "ios.kraliss.com",
+                "app_store_id": "1448271322"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
